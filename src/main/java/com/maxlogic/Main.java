@@ -170,15 +170,20 @@ public class Main {
         return sum;
     }
 
-    private static String multipleOfThree(int init, int end){
+    private static String multipleOfThree(int init, int end) {
         String multiples;
         Set<String> multiplesSet = new HashSet<>();
 
-        for ( int i=init; i<= end; i++){
-            if ( i%3 == 0) multiplesSet.add(String.valueOf(i));
+        for (int i = init; i <= end; i++) {
+            if (i % 3 == 0)
+                multiplesSet.add(String.valueOf(i));
         }
-        multiples = multiplesSet.stream().sorted().reduce("",(ans,i) -> ans.length() > 0 ? ans + ", " + i : ans + i);
+        multiples = multiplesSet.stream().sorted().reduce("", (ans, i) -> ans.length() > 0 ? ans + ", " + i : ans + i);
         return multiples;
+    }
+
+    private static boolean linearSearch(String itemToSearch, List<String> items) {
+        return items.stream().anyMatch(item -> item.equalsIgnoreCase(itemToSearch));
     }
 
     public static void main(String[] args) {
@@ -195,6 +200,7 @@ public class Main {
             System.out.println("\t  11. Java program to find the geometric mean of n numbers");
             System.out.println("\t  12. Java program to find the sum of the digits of an integer using a while loop");
             System.out.println("\t  13. Java program to display all the multiples of 3 within the range 10 to 50");
+            System.out.println("\t  21. Java program to implement linear search");
 
             System.out.println("\t 46. Exit");
             Scanner sc = new Scanner(System.in);
@@ -241,7 +247,23 @@ public class Main {
                     System.out.println("The sum of the digits of an integer is: " + sumOfDigits());
                     break;
                 case 13:
-                    System.out.println("the multiple of 3 in the range of 10 to 50 is : " + multipleOfThree(10,50));
+                    System.out.println("the multiple of 3 in the range of 10 to 50 is : " + multipleOfThree(10, 50));
+                    break;
+                case 21:
+                    List<String> items = new ArrayList<>();
+                    while (true) {
+                        System.out.println("Enter existent value. for finish press X: ");
+                        String item = sc.nextLine();
+                        if (item.equalsIgnoreCase("x"))
+                            break;
+                        items.add(item);
+                    }
+                    System.out.println("Ingrese el item a buscar: ");
+                    String itemToSearch = sc.nextLine();
+                    if (linearSearch(itemToSearch, items))
+                        System.out.println("the value '" + itemToSearch + "' exist");
+                    else
+                        System.out.println("the value '" + itemToSearch + "' not exist");
                     break;
 
             }
