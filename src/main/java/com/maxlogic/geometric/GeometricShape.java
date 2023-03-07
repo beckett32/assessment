@@ -1,7 +1,7 @@
-package com.assesment;
+package com.maxlogic.geometric;
 
 public interface GeometricShape {
     double area();
-    float perimeter();
+    double perimeter();
 
 }

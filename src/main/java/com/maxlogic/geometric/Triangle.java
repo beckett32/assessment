@@ -1,4 +1,4 @@
-package com.assesment;
+package com.maxlogic.geometric;
 
 public class Triangle implements GeometricShape{
     private float side_a =0;
@@ -44,7 +44,7 @@ public class Triangle implements GeometricShape{
     }
 
     @Override
-    public float perimeter() {
+    public double perimeter() {
         return side_a+side_b+side_c;
     }
 }
