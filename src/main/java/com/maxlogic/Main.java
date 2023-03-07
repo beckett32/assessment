@@ -17,11 +17,10 @@ public class Main {
                 break;
             numbers.add(Integer.parseInt(invalue));
         }
-        Float sum = 0f;
-        for (int i = 0; i < numbers.size(); i++)
-            sum += numbers.get(i);
-        float average = sum / numbers.size();
-        return average;
+        float sum = 0f;
+        for (int i : numbers)
+            sum += i;
+        return sum / numbers.size();
     }
 
     private static double product() {
@@ -38,14 +37,14 @@ public class Main {
         }
         double prod = 1;
 
-        for (int i = 0; i < realNumbers.size(); i++)
-            prod *= realNumbers.get(i);
+        for (Double realNumber : realNumbers)
+            prod *= realNumber;
         return prod;
 
     }
 
     private static Circunference getCircumference() {
-        float ratio = 0;
+        float ratio;
         while (true) {
             System.out.print("Enter the ratio of the circumference: ");
             Scanner sc = new Scanner(System.in);
@@ -59,9 +58,8 @@ public class Main {
         return new Circunference(ratio);
     }
 
-    private static boolean multipleOf() {
-        boolean result = true;
-        float dividend = 0;
+    private static void multipleOf() {
+        float dividend;
 
         List<Float> divisor = new ArrayList<>();
         while (true) {
@@ -88,25 +86,23 @@ public class Main {
             }
         }
 
-        for (int i = 0; i < divisor.size(); i++) {
-            if ((dividend % divisor.get(i)) == 0)
-                System.out.println("the number " + dividend + " is multiple of " + divisor.get(i));
+        for (Float aFloat : divisor) {
+            if ((dividend % aFloat) == 0)
+                System.out.println("the number " + dividend + " is multiple of " + aFloat);
             else {
-                System.out.println("the number " + dividend + " isn't multiple of " + divisor.get(i));
-                result = false;
+                System.out.println("the number " + dividend + " isn't multiple of " + aFloat);
             }
         }
 
-        return result;
     }
 
-    private static String reverseString(String in) {
+    /*private  static String reverseString(String in) {
         String out = "";
         for (int i = in.length() - 1; i >= 0; i--) {
             out += in.charAt(i);
         }
         return out;
-    }
+    }*/
 
     private static int reverseNumber(int number) {
         int rev = 0;
@@ -119,25 +115,14 @@ public class Main {
     }
 
     private static double geometricMeanLog() {
-        List<Double> values = new ArrayList<>();
-        while (true) {
-            System.out.println("Enter number, press 'X' if finish: ");
-            Scanner sc = new Scanner(System.in);
-            String value = sc.nextLine();
-            if (value.equalsIgnoreCase("x"))
-                break;
-            try {
-                values.add(Double.valueOf(value));
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter an double value!!!");
-            }
-        }
+
+        List<Double> values = geometricMeanUI();
         double lnSumValue = values.stream().reduce(0.0, (ans, i) -> ans + Math.log(i));
         return Math.exp((1.0 / values.size()) * lnSumValue);
 
     }
 
-    private static double geometricMean() {
+    private static List<Double> geometricMeanUI() {
         List<Double> values = new ArrayList<>();
         while (true) {
             System.out.println("Enter number, press 'X' if finish: ");
@@ -151,21 +136,24 @@ public class Main {
                 System.out.println("Please enter an double value!!!");
             }
         }
+        return values;
+    }
+
+    /*private static double geometricMean() {
+        List<Double> values = geometricMeanUI();
         double sumValue = values.stream().reduce(1.0, (ans, i) -> ans * i);
         return Math.pow(sumValue, 1.0 / values.size());
 
-    }
+    }*/
 
     private static int sumOfDigits() {
         int sum = 0;
         System.out.println("Enter an integer number: ");
         Scanner sc = new Scanner(System.in);
         int number = sc.nextInt();
-        int digit = number;
-
-        while (digit != 0) {
-            sum += digit % 10;
-            digit = digit / 10;
+        while (number != 0) {
+            sum += number % 10;
+            number = number / 10;
         }
         return sum;
     }
@@ -186,6 +174,15 @@ public class Main {
         return items.stream().anyMatch(item -> item.equalsIgnoreCase(itemToSearch));
     }
 
+    private static boolean isEvenSumDigit(int number) {
+        int sum = 0;
+        while (number != 0) {
+            sum += number % 10;
+            number = number / 10;
+        }
+        return sum % 2 == 0;
+    }
+
     public static void main(String[] args) {
 
         while (true) {
@@ -200,6 +197,7 @@ public class Main {
             System.out.println("\t  11. Java program to find the geometric mean of n numbers");
             System.out.println("\t  12. Java program to find the sum of the digits of an integer using a while loop");
             System.out.println("\t  13. Java program to display all the multiples of 3 within the range 10 to 50");
+            System.out.println("\t  14. Java program to display all integers within the range 100-150 whose sum of digits is an even number");
             System.out.println("\t  21. Java program to implement linear search");
 
             System.out.println("\t 46. Exit");
@@ -215,41 +213,36 @@ public class Main {
                 break;
 
             switch (opt) {
-                case 1:
+                case 1 -> {
                     float avr = average();
                     System.out.println("the average of the numers is " + avr);
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     double prd = product();
                     System.out.println("the product of the real numbers is " + prd + "\n");
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     GeometricShape circ = getCircumference();
                     System.out.println("the perimeter of the circumference is  " + circ.perimeter());
                     System.out.println("the area of the circumference is " + circ.area() + "\n");
-                    break;
-                case 4:
-                case 5:
-                    multipleOf();
-                    break;
-                case 6:
-                    System.out.println("Not implemented yet");
-                    break;
-                case 7:
+                }
+                case 4, 5 -> multipleOf();
+                case 6 -> System.out.println("Not implemented yet");
+                case 7 -> {
                     System.out.println("Enter a number");
                     sc = new Scanner(System.in);
                     System.out.println(reverseNumber(sc.nextInt()));
-                    break;
-                case 11:
-                    System.out.println("The Geometric mean is: " + geometricMeanLog());
-                    break;
-                case 12:
-                    System.out.println("The sum of the digits of an integer is: " + sumOfDigits());
-                    break;
-                case 13:
-                    System.out.println("the multiple of 3 in the range of 10 to 50 is : " + multipleOfThree(10, 50));
-                    break;
-                case 21:
+                }
+                case 11 -> System.out.println("The Geometric mean is: " + geometricMeanLog());
+                case 12 -> System.out.println("The sum of the digits of an integer is: " + sumOfDigits());
+                case 13 -> System.out.printf("the multiple of 3 in the range of 10 to 50 is : %s%n", multipleOfThree(10, 50));
+                case 14 -> {
+                    for (int i = 100; i <= 150; i++) {
+                        if (isEvenSumDigit(i))
+                            System.out.println(i);
+                    }
+                }
+                case 21 -> {
                     List<String> items = new ArrayList<>();
                     while (true) {
                         System.out.println("Enter existent value. for finish press X: ");
@@ -264,8 +257,7 @@ public class Main {
                         System.out.println("the value '" + itemToSearch + "' exist");
                     else
                         System.out.println("the value '" + itemToSearch + "' not exist");
-                    break;
-
+                }
             }
         }
     }
