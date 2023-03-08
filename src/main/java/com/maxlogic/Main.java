@@ -228,6 +228,7 @@ public class Main {
             System.out.println("\t  13. Java program to display all the multiples of 3 within the range 10 to 50");
             System.out.println("\t  14. Java program to display all integers within the range 100-150 whose sum of digits is an even number");
             System.out.println("\t  15. Java program to check whether the given integer is a prime number or not");
+            System.out.println("\t  16. Java program to generate the prime numbers from 1 to N");
             System.out.println("\t  21. Java program to implement linear search" );
             System.out.println("\t  46. Exit"+ ANSI_RESET);
             Scanner sc = new Scanner(System.in);
@@ -286,6 +287,16 @@ public class Main {
                     else
                         System.out.printf("El número %s no es primo %n",number);
 
+                }
+                case 16 ->{
+                    System.out.println("Enter a number: ");
+                    int number = sc.nextInt();
+                    System.out.print("[2");
+                    for (int i =3 ; i < number; i++){
+                        if ( isPrime(i))
+                            System.out.printf(", %d", i);
+                    }
+                    System.out.println("]");
                 }
                 case 21 -> {
                     List<String> items = new ArrayList<>();
