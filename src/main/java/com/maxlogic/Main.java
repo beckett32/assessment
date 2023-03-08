@@ -6,6 +6,27 @@ import com.maxlogic.geometric.GeometricShape;
 import java.util.*;
 
 public class Main {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
+
+    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+    public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
+    public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
+    public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+
+
     private static float average() {
         List<Integer> numbers = new ArrayList<>();
         System.out.println("Enter numbers or press X to exit: ");
@@ -183,11 +204,19 @@ public class Main {
         return sum % 2 == 0;
     }
 
+    private static boolean isPrime(int number){
+        boolean isprime =true;
+        for ( int i=2; i<=number/2; i++){
+            if ( !(isprime = number %i != 0)) break;
+        }
+        return isprime;
+    }
+
     public static void main(String[] args) {
 
         while (true) {
-            System.out.println("Select the assesment to execute.");
-            System.out.println("\t  1. Java program to find out the average of a set of integers");
+            System.out.println(ANSI_BLUE + "Select the assesment to execute." + ANSI_RESET);
+            System.out.println(ANSI_RED + "\t  1. Java program to find out the average of a set of integers");
             System.out.println("\t  2. Java program to find the product of a set of real numbers");
             System.out.println("\t  3. Java program to find the circumference and area of a circle with a given radius");
             System.out.println("\t  4. Java program to check whether the given integer is a multiple of 5");
@@ -198,9 +227,9 @@ public class Main {
             System.out.println("\t  12. Java program to find the sum of the digits of an integer using a while loop");
             System.out.println("\t  13. Java program to display all the multiples of 3 within the range 10 to 50");
             System.out.println("\t  14. Java program to display all integers within the range 100-150 whose sum of digits is an even number");
-            System.out.println("\t  21. Java program to implement linear search");
-
-            System.out.println("\t 46. Exit");
+            System.out.println("\t  15. Java program to check whether the given integer is a prime number or not");
+            System.out.println("\t  21. Java program to implement linear search" );
+            System.out.println("\t  46. Exit"+ ANSI_RESET);
             Scanner sc = new Scanner(System.in);
             String optString = sc.nextLine();
             int opt = 0;
@@ -241,6 +270,22 @@ public class Main {
                         if (isEvenSumDigit(i))
                             System.out.println(i);
                     }
+                }case 15 -> {
+                    int number = 0;
+                    while(true) {
+                        System.out.println("Enter a number");
+                        try {
+                            number = sc.nextInt();
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("You need to enter a number!!");
+                        }
+                    }
+                    if (isPrime(number))
+                        System.out.printf("El número %s es primo %n",number);
+                    else
+                        System.out.printf("El número %s no es primo %n",number);
+
                 }
                 case 21 -> {
                     List<String> items = new ArrayList<>();
