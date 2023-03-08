@@ -3,6 +3,7 @@ package com.maxlogic;
 import com.maxlogic.geometric.Circunference;
 import com.maxlogic.geometric.GeometricShape;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class Main {
@@ -219,6 +220,13 @@ public class Main {
             printAll(value - 1);
     }
 
+    private static BigDecimal factorial(int value) {
+        if (value > 1)
+            return BigDecimal.valueOf(value).multiply(factorial(value-1));
+        return BigDecimal.valueOf(1);
+
+    }
+
     public static void main(String[] args) {
 
         while (true) {
@@ -238,6 +246,8 @@ public class Main {
             System.out.println("\t  16. Java program to generate the prime numbers from 1 to N");
             System.out.println("\t  17. Java program to find the roots of a quadratic equation");
             System.out.println("\t  18. Java program to print the numbers from a given number n till 0 using recursion");
+            System.out.println("\t  19. Java program to find the factorial of a number using recursion");
+
             System.out.println("\t  21. Java program to implement linear search");
 
             System.out.println("\t  46. Exit" + ANSI_RESET);
@@ -333,6 +343,11 @@ public class Main {
                     System.out.println("Enter a number: ");
                     int value = sc.nextInt();
                     printAll(value);
+                }
+                case 19 -> {
+                    System.out.println("Enter a number: ");
+                    int value = sc.nextInt();
+                    System.out.printf( "the factorial of %s is %s %n",value, factorial(value));
                 }
                 case 21 -> {
                     List<String> items = new ArrayList<>();
