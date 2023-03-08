@@ -204,12 +204,19 @@ public class Main {
         return sum % 2 == 0;
     }
 
-    private static boolean isPrime(int number){
-        boolean isprime =true;
-        for ( int i=2; i<=number/2; i++){
-            if ( !(isprime = number %i != 0)) break;
+    private static boolean isPrime(int number) {
+        boolean isprime = true;
+        for (int i = 2; i <= number / 2; i++) {
+            if (!(isprime = number % i != 0))
+                break;
         }
         return isprime;
+    }
+
+    private static void printAll(int value) {
+        System.out.println(value);
+        if (value > 0)
+            printAll(value - 1);
     }
 
     public static void main(String[] args) {
@@ -229,8 +236,11 @@ public class Main {
             System.out.println("\t  14. Java program to display all integers within the range 100-150 whose sum of digits is an even number");
             System.out.println("\t  15. Java program to check whether the given integer is a prime number or not");
             System.out.println("\t  16. Java program to generate the prime numbers from 1 to N");
-            System.out.println("\t  21. Java program to implement linear search" );
-            System.out.println("\t  46. Exit"+ ANSI_RESET);
+            System.out.println("\t  17. Java program to find the roots of a quadratic equation");
+            System.out.println("\t  18. Java program to print the numbers from a given number n till 0 using recursion");
+            System.out.println("\t  21. Java program to implement linear search");
+
+            System.out.println("\t  46. Exit" + ANSI_RESET);
             Scanner sc = new Scanner(System.in);
             String optString = sc.nextLine();
             int opt = 0;
@@ -271,9 +281,10 @@ public class Main {
                         if (isEvenSumDigit(i))
                             System.out.println(i);
                     }
-                }case 15 -> {
+                }
+                case 15 -> {
                     int number = 0;
-                    while(true) {
+                    while (true) {
                         System.out.println("Enter a number");
                         try {
                             number = sc.nextInt();
@@ -283,20 +294,45 @@ public class Main {
                         }
                     }
                     if (isPrime(number))
-                        System.out.printf("El número %s es primo %n",number);
+                        System.out.printf("El número %s es primo %n", number);
                     else
-                        System.out.printf("El número %s no es primo %n",number);
+                        System.out.printf("El número %s no es primo %n", number);
 
                 }
-                case 16 ->{
+                case 16 -> {
                     System.out.println("Enter a number: ");
                     int number = sc.nextInt();
                     System.out.print("[2");
-                    for (int i =3 ; i < number; i++){
-                        if ( isPrime(i))
+                    for (int i = 3; i < number; i++) {
+                        if (isPrime(i))
                             System.out.printf(", %d", i);
                     }
                     System.out.println("]");
+                }
+                case 17 -> {
+                    System.out.print("Enter the a number: ");
+                    double a = sc.nextDouble();
+                    System.out.print("Enter the b number: ");
+                    double b = sc.nextDouble();
+                    System.out.print("Enter the c number: ");
+                    double c = sc.nextDouble();
+
+                    double value = Math.pow(b, 2) - 4 * a * c;
+                    if (value < 0)
+                        System.out.println("The equation don't have solution");
+                    else {
+
+                        double x1 = (-b + Math.sqrt(value)) / (2 * a);
+                        double x2 = (-b - Math.sqrt(value)) / (2 * a);
+
+                        System.out.printf("the root is (%s,%s)%n", x1, x2);
+                    }
+
+                }
+                case 18 -> {
+                    System.out.println("Enter a number: ");
+                    int value = sc.nextInt();
+                    printAll(value);
                 }
                 case 21 -> {
                     List<String> items = new ArrayList<>();
